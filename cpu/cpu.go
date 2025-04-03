@@ -1,6 +1,9 @@
 package cpu
 
-import font "chip8/data"
+import (
+	font "chip8/data"
+	"chip8/graphics"
+)
 
 type CPU struct {
 	registers      [16]byte   // 16 8-bit registers
@@ -43,4 +46,22 @@ func (c *CPU) LoadRom(data []byte) {
 
 	// set program counter to start of rom
 	c.programCounter = 0x200
+}
+
+// cpu cycle
+func (c *CPU) Cycle(g *graphics.Graphics) {
+	// load opcode and increment program counter
+	c.opcode = uint16(c.memory[c.programCounter])<<8 | uint16(c.memory[c.programCounter+1])
+	c.programCounter += 2
+
+	// execute current instruction
+	c.ExecuteOpcode(g)
+
+	// decrease timers
+	if c.delayTimer > 0 {
+		c.delayTimer--
+	}
+	if c.soundTimer > 0 {
+		c.soundTimer--
+	}
 }
