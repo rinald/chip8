@@ -8,7 +8,7 @@ import (
 	Rom "chip8/rom"
 )
 
-const DELAY = 10 // milliseconds
+const DELAY = 2 // milliseconds
 
 func main() {
 	cpu := Cpu.CPU{}
@@ -17,7 +17,7 @@ func main() {
 	renderer := Graphics.Renderer{}
 
 	cpu.Init()
-	rom.Load("roms/maze.ch8", &cpu)
+	rom.Load("roms/pong.ch8", &cpu)
 	cpu.LoadRom(rom.Data)
 	renderer.Init()
 

@@ -3,6 +3,7 @@ package graphics
 const (
 	WIDTH  = 64
 	HEIGHT = 32
+	TOTAL  = WIDTH * HEIGHT
 )
 
 type Graphics struct {

@@ -190,16 +190,16 @@ func (c *CPU) I_DXYN(g *graphics.Graphics) {
 	Vy := (c.opcode & 0x00F0) >> 4
 	n := (c.opcode & 0x000F)
 
-	x := c.registers[Vx] % graphics.WIDTH
-	y := c.registers[Vy] % graphics.HEIGHT
+	x := uint16(c.registers[Vx]) % graphics.WIDTH
+	y := uint16(c.registers[Vy]) % graphics.HEIGHT
 
 	c.registers[0xF] = 0
 
 	for i := uint16(0); i < n; i++ {
 		sprite := c.memory[c.index+i]
-		for j := byte(0); j < 8; j++ {
+		for j := uint16(0); j < 8; j++ {
 			spritePixel := sprite & (0x80 >> j)
-			screenPixel := &g.Screen[(y+byte(i))*graphics.WIDTH+x+j]
+			screenPixel := &g.Screen[((y+i)*graphics.WIDTH+x+j)%graphics.TOTAL]
 
 			if spritePixel != 0 {
 				if *screenPixel == 0xFFFFFFFF {
