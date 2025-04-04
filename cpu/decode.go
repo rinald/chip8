@@ -1,10 +1,13 @@
 package cpu
 
-import "chip8/graphics"
+import (
+	"chip8/graphics"
+)
 
 func (c *CPU) ExecuteOpcode(g *graphics.Graphics) {
-	leftByte := c.opcode >> 8
-	rightByte := c.opcode & 0xFF
+	leftByte := c.opcode >> 12
+	rightByte := c.opcode & 0xF
+	rightBytes := c.opcode & 0xFF
 
 	switch c.opcode {
 	case 0x00E0:
@@ -60,13 +63,13 @@ func (c *CPU) ExecuteOpcode(g *graphics.Graphics) {
 	case 0xD:
 		c.I_DXYN(g)
 	case 0xE:
-		if rightByte == 0x9E {
+		if rightBytes == 0x9E {
 			c.I_EX9E()
-		} else if rightByte == 0xA1 {
+		} else if rightBytes == 0xA1 {
 			c.I_EXA1()
 		}
 	case 0xF:
-		switch rightByte {
+		switch rightBytes {
 		case 0x07:
 			c.I_FX07()
 		case 0x0A:

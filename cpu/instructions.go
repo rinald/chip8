@@ -205,7 +205,7 @@ func (c *CPU) I_DXYN(g *graphics.Graphics) {
 				if *screenPixel == 0xFFFFFFFF {
 					c.registers[0xF] = 1
 				}
-				*screenPixel ^= 1
+				*screenPixel ^= 0xFFFFFFFF
 			}
 		}
 	}
