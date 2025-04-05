@@ -86,3 +86,9 @@ chip8/
 - **graphics/**: Handles graphics rendering and audio playback using SDL2.
 - **rom/**: Manages loading of CHIP-8 ROM files.
 - **main.go**: The entry point of the emulator.
+
+## Screenshots
+
+![Maze](screenshots/maze.png)
+![Pong](screenshots/pong.png)
+![Space Invaders](screenshots/space-invaders.png)
