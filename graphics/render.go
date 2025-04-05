@@ -7,7 +7,6 @@ import (
 )
 
 const (
-	DELAY        = 2 // milliseconds
 	SCALE_FACTOR = 15
 	FREQUENCY    = 440
 	SAMPLE_RATE  = 44100
@@ -80,9 +79,6 @@ func (r *Renderer) Update(g *Graphics) {
 	r.renderer.Clear()
 	r.renderer.Copy(r.texture, nil, nil)
 	r.renderer.Present()
-
-	// add delay
-	sdl.Delay(DELAY)
 }
 
 func (r *Renderer) ProcessInput(keypad *[16]bool) bool {
