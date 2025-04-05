@@ -1,14 +1,10 @@
 package main
 
 import (
-	"time"
-
 	Cpu "chip8/cpu"
 	Graphics "chip8/graphics"
 	Rom "chip8/rom"
 )
-
-const DELAY = 2 // milliseconds
 
 func main() {
 	cpu := Cpu.CPU{}
@@ -21,10 +17,16 @@ func main() {
 	cpu.LoadRom(rom.Data)
 	renderer.Init()
 
+	quit := false
+
 	// main loop
-	for {
+	for !quit {
+		quit = renderer.ProcessInput(&cpu.Keypad)
+
 		cpu.Cycle(&graphics)
 		renderer.Update(&graphics)
-		time.Sleep(time.Millisecond * DELAY)
 	}
+
+	// Cleanup resources
+	renderer.Cleanup()
 }

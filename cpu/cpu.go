@@ -8,7 +8,6 @@ import (
 type CPU struct {
 	registers      [16]byte   // 16 8-bit registers
 	memory         [4096]byte // 4KB of memory
-	keypad         [16]bool   // 16-key keypad
 	index          uint16     // 16-bit index register
 	programCounter uint16     // 16-bit program counter
 	stack          [16]uint16 // 16-level stack
@@ -16,13 +15,13 @@ type CPU struct {
 	delayTimer     byte       // delay timer
 	soundTimer     byte       // sound timer
 	opcode         uint16     // current opcode
+	Keypad         [16]bool   // 16-key keypad
 }
 
 // initialize the CPU
 func (c *CPU) Init() {
 	c.registers = [16]byte{}
 	c.memory = [4096]byte{}
-	c.keypad = [16]bool{}
 	c.index = 0
 	c.programCounter = 0
 	c.stack = [16]uint16{}
@@ -30,6 +29,7 @@ func (c *CPU) Init() {
 	c.delayTimer = 0
 	c.soundTimer = 0
 	c.opcode = 0
+	c.Keypad = [16]bool{}
 }
 
 // load rom into memory

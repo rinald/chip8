@@ -214,7 +214,7 @@ func (c *CPU) I_DXYN(g *graphics.Graphics) {
 // skip next instruction if key with the value of Vx is pressed (SKP Vx)
 func (c *CPU) I_EX9E() {
 	Vx := (c.opcode & 0x0F00) >> 8
-	if c.keypad[c.registers[Vx]] {
+	if c.Keypad[c.registers[Vx]] {
 		c.programCounter += 2
 	}
 }
@@ -222,7 +222,7 @@ func (c *CPU) I_EX9E() {
 // skip next instruction if key with the value of Vx is not pressed (SKNP Vx)
 func (c *CPU) I_EXA1() {
 	Vx := (c.opcode & 0x0F00) >> 8
-	if !c.keypad[c.registers[Vx]] {
+	if !c.Keypad[c.registers[Vx]] {
 		c.programCounter += 2
 	}
 }
@@ -237,7 +237,7 @@ func (c *CPU) I_FX07() {
 func (c *CPU) I_FX0A() {
 	Vx := (c.opcode & 0x0F00) >> 8
 	for i := byte(0); i < 16; i++ {
-		if c.keypad[i] {
+		if c.Keypad[i] {
 			c.registers[Vx] = i
 			return
 		}
