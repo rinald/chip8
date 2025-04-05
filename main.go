@@ -25,8 +25,9 @@ func main() {
 
 		cpu.Cycle(&graphics)
 		renderer.Update(&graphics)
+		renderer.PlaySound(cpu.SoundTimer)
 	}
 
-	// Cleanup resources
+	// cleanup resources
 	renderer.Cleanup()
 }

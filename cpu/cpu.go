@@ -13,8 +13,8 @@ type CPU struct {
 	stack          [16]uint16 // 16-level stack
 	stackPointer   byte       // 8-bit stack pointer
 	delayTimer     byte       // delay timer
-	soundTimer     byte       // sound timer
 	opcode         uint16     // current opcode
+	SoundTimer     byte       // sound timer
 	Keypad         [16]bool   // 16-key keypad
 }
 
@@ -27,8 +27,8 @@ func (c *CPU) Init() {
 	c.stack = [16]uint16{}
 	c.stackPointer = 0
 	c.delayTimer = 0
-	c.soundTimer = 0
 	c.opcode = 0
+	c.SoundTimer = 0
 	c.Keypad = [16]bool{}
 }
 
@@ -61,7 +61,7 @@ func (c *CPU) Cycle(g *graphics.Graphics) {
 	if c.delayTimer > 0 {
 		c.delayTimer--
 	}
-	if c.soundTimer > 0 {
-		c.soundTimer--
+	if c.SoundTimer > 0 {
+		c.SoundTimer--
 	}
 }

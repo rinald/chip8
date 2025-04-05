@@ -254,7 +254,7 @@ func (c *CPU) I_FX15() {
 // set sound timer = Vx (LD ST, Vx)
 func (c *CPU) I_FX18() {
 	Vx := (c.opcode & 0x0F00) >> 8
-	c.soundTimer = c.registers[Vx]
+	c.SoundTimer = c.registers[Vx]
 }
 
 // set I = I + Vx (ADD I, Vx)

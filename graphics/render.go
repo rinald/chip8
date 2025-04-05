@@ -6,7 +6,12 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
-const SCALE_FACTOR = 15
+const (
+	DELAY        = 2 // milliseconds
+	SCALE_FACTOR = 15
+	FREQUENCY    = 440
+	SAMPLE_RATE  = 44100
+)
 
 type Renderer struct {
 	window   *sdl.Window
@@ -15,7 +20,7 @@ type Renderer struct {
 }
 
 func (r *Renderer) Init() {
-	if err := sdl.Init(sdl.INIT_VIDEO | sdl.INIT_EVENTS); err != nil {
+	if err := sdl.Init(sdl.INIT_VIDEO | sdl.INIT_EVENTS | sdl.INIT_AUDIO); err != nil {
 		panic(err)
 	}
 
@@ -39,12 +44,34 @@ func (r *Renderer) Init() {
 	}
 
 	r.texture = texture
+
+	spec := sdl.AudioSpec{
+		Freq:     SAMPLE_RATE,
+		Format:   sdl.AUDIO_U8,
+		Channels: 2,
+		Samples:  4096,
+		Callback: AudioCallback,
+	}
+
+	// open audio
+	if err := sdl.OpenAudio(&spec, nil); err != nil {
+		panic(err)
+	}
+}
+
+func (r *Renderer) PlaySound(timer byte) {
+	if timer > 0 {
+		sdl.PauseAudio(false)
+	} else {
+		sdl.PauseAudio(true)
+	}
 }
 
 func (r *Renderer) Cleanup() {
 	r.texture.Destroy()
 	r.renderer.Destroy()
 	r.window.Destroy()
+	sdl.CloseAudio()
 	sdl.Quit()
 }
 
@@ -53,6 +80,9 @@ func (r *Renderer) Update(g *Graphics) {
 	r.renderer.Clear()
 	r.renderer.Copy(r.texture, nil, nil)
 	r.renderer.Present()
+
+	// add delay
+	sdl.Delay(DELAY)
 }
 
 func (r *Renderer) ProcessInput(keypad *[16]bool) bool {
