@@ -69,37 +69,37 @@ func (r *Renderer) ProcessInput(keypad *[16]bool) bool {
 			case sdl.K_ESCAPE:
 				quit = true
 			case sdl.K_1:
-				keypad[0] = state == sdl.KEYDOWN
+				keypad[0x1] = state == sdl.KEYDOWN
 			case sdl.K_2:
-				keypad[1] = state == sdl.KEYDOWN
+				keypad[0x2] = state == sdl.KEYDOWN
 			case sdl.K_3:
-				keypad[2] = state == sdl.KEYDOWN
+				keypad[0x3] = state == sdl.KEYDOWN
 			case sdl.K_4:
-				keypad[3] = state == sdl.KEYDOWN
+				keypad[0xC] = state == sdl.KEYDOWN
 			case sdl.K_q:
-				keypad[4] = state == sdl.KEYDOWN
+				keypad[0x4] = state == sdl.KEYDOWN
 			case sdl.K_w:
-				keypad[5] = state == sdl.KEYDOWN
+				keypad[0x5] = state == sdl.KEYDOWN
 			case sdl.K_e:
-				keypad[6] = state == sdl.KEYDOWN
+				keypad[0x6] = state == sdl.KEYDOWN
 			case sdl.K_r:
-				keypad[7] = state == sdl.KEYDOWN
+				keypad[0xD] = state == sdl.KEYDOWN
 			case sdl.K_a:
-				keypad[8] = state == sdl.KEYDOWN
+				keypad[0x7] = state == sdl.KEYDOWN
 			case sdl.K_s:
-				keypad[9] = state == sdl.KEYDOWN
+				keypad[0x8] = state == sdl.KEYDOWN
 			case sdl.K_d:
-				keypad[10] = state == sdl.KEYDOWN
+				keypad[0x9] = state == sdl.KEYDOWN
 			case sdl.K_f:
-				keypad[11] = state == sdl.KEYDOWN
+				keypad[0xE] = state == sdl.KEYDOWN
 			case sdl.K_z:
-				keypad[12] = state == sdl.KEYDOWN
+				keypad[0xA] = state == sdl.KEYDOWN
 			case sdl.K_x:
-				keypad[13] = state == sdl.KEYDOWN
+				keypad[0x0] = state == sdl.KEYDOWN
 			case sdl.K_c:
-				keypad[14] = state == sdl.KEYDOWN
+				keypad[0xB] = state == sdl.KEYDOWN
 			case sdl.K_v:
-				keypad[15] = state == sdl.KEYDOWN
+				keypad[0xF] = state == sdl.KEYDOWN
 			}
 		}
 	}
